@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/PicCollage-minesweeper-count7/static/css/main.326466a9.css",
+    "main.js": "/PicCollage-minesweeper-count7/static/js/main.ddcbd084.js",
+    "index.html": "/PicCollage-minesweeper-count7/index.html",
+    "main.326466a9.css.map": "/PicCollage-minesweeper-count7/static/css/main.326466a9.css.map",
+    "main.ddcbd084.js.map": "/PicCollage-minesweeper-count7/static/js/main.ddcbd084.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.326466a9.css",
+    "static/js/main.ddcbd084.js"
+  ]
+}
