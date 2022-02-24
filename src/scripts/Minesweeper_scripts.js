@@ -91,14 +91,3 @@ const propagateOpeningHelper = (b, flipSet, x, y, gameConfig) => {
     propagateOpeningHelper(b, flipSet, x - 1, y - 1, gameConfig);
   }
 };
-
-export const flipCells = (cellStates, flipArray, gameState, setGameState) => {
-  if (flipArray.length === 0) return;
-  const [x, y] = flipArray[0].split('-');
-  flipArray.shift();
-  setTimeout( () => {
-    cellStates[x][y] = 1;
-    setGameState({...gameState, cellStates: cellStates});
-    flipCells(cellStates, flipArray, gameState, setGameState)
-  }, 100)
-}

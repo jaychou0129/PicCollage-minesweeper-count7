@@ -1,7 +1,7 @@
 {
   "name": "piccollage-takehome",
   "version": "0.1.0",
-  "homepage": "https://jaychou0129.github.io/PicCollage-minesweeper-count7",
+  "homepage": "https://jaychou0129.github.io/PicCollage-minesweeper-count7/",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.3.0",
