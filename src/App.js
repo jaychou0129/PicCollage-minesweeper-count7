@@ -11,10 +11,10 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route path="/" element={<PageSelection />} />
-          <Route path="/minesweeper" element={<Minesweeper />} />
-          <Route path="/count7" element={<Count7 />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="/PicCollage-minesweeper-count7/" element={<PageSelection />} />
+          <Route path="/PicCollage-minesweeper-count7/minesweeper" element={<Minesweeper />} />
+          <Route path="/PicCollage-minesweeper-count7/count7" element={<Count7 />} />
+          <Route path="/PicCollage-minesweeper-count7/*" element={<NotFound />} />
         </Routes>
       </Router>
     </div>
