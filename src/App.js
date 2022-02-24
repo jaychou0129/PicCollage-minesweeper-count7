@@ -11,9 +11,9 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route path="/" element={<PageSelection />} />
-          <Route path="/minesweeper" element={<Minesweeper />} />
-          <Route path="/count7" element={<Count7 />} />
+          <Route path="" element={<PageSelection />} />
+          <Route path="minesweeper" element={<Minesweeper />} />
+          <Route path="count7" element={<Count7 />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
