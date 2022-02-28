@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/PicCollage-minesweeper-count7/static/css/main.c52ec922.css",
-    "main.js": "/PicCollage-minesweeper-count7/static/js/main.db81d48a.js",
+    "main.css": "/PicCollage-minesweeper-count7/static/css/main.91f951da.css",
+    "main.js": "/PicCollage-minesweeper-count7/static/js/main.52200a08.js",
     "index.html": "/PicCollage-minesweeper-count7/index.html",
-    "main.c52ec922.css.map": "/PicCollage-minesweeper-count7/static/css/main.c52ec922.css.map",
-    "main.db81d48a.js.map": "/PicCollage-minesweeper-count7/static/js/main.db81d48a.js.map"
+    "main.91f951da.css.map": "/PicCollage-minesweeper-count7/static/css/main.91f951da.css.map",
+    "main.52200a08.js.map": "/PicCollage-minesweeper-count7/static/js/main.52200a08.js.map"
   },
   "entrypoints": [
-    "static/css/main.c52ec922.css",
-    "static/js/main.db81d48a.js"
+    "static/css/main.91f951da.css",
+    "static/js/main.52200a08.js"
   ]
 }
