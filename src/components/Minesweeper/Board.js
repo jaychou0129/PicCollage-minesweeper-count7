@@ -5,12 +5,16 @@ import MessageModal from "../MessageModal";
 import { deepCopy, calculateCount } from "../../scripts/helpers";
 import {
   initializeBoard,
-  propagateOpening
+  propagateOpening,
 } from "../../scripts/Minesweeper_scripts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHourglass } from "@fortawesome/free-solid-svg-icons";
-import { Row, Col, Button } from "react-bootstrap";
+import {
+  Row,
+  Col
+} from "react-bootstrap";
 import Timer from "./Timer";
+import useWindowDimensions from "../useWindowDimensions";
 
 export default function Board() {
   const [gameOver, setGameOver] = useState(false);
@@ -41,6 +45,8 @@ export default function Board() {
 
   const [showModal, setShowModal] = useState(false);
   const [message, setMessage] = useState("");
+  const [fontSize, setFontSize] = useState("20px");
+  const { height, width } = useWindowDimensions();
 
   useEffect(resetGame, [gameConfig]);
 
@@ -48,7 +54,10 @@ export default function Board() {
     if (gameState.numUnflipped === gameConfig.numBombs) {
       setGameOver(true);
 
-      const timeString = ("0" + Math.floor(time / 60)).slice(-2) + ":" + ("0" + Math.floor(time % 60)).slice(-2);
+      const timeString =
+        ("0" + Math.floor(time / 60)).slice(-2) +
+        ":" +
+        ("0" + Math.floor(time % 60)).slice(-2);
       setMessage("You Won!\nTime: " + timeString);
       setShowModal(true);
     }
@@ -70,16 +79,22 @@ export default function Board() {
     }
   }, [gameOver]);
 
+  useEffect(() => {
+    setFontSize(
+      ((Math.min(width, height) * 0.85) / gameConfig.dimension) * 0.5 + "px"
+    );
+  }, [width, height, gameConfig.dimension]);
+
   const flipCells = (cellStates, flipArray) => {
     if (flipArray.length === 0) return;
-    const [x, y] = flipArray[0].split('-');
+    const [x, y] = flipArray[0].split("-");
     flipArray.shift();
-    setTimeout( () => {
+    setTimeout(() => {
       cellStates[x][y] = 1;
-      setGameState({...gameState, cellStates: cellStates});
-      flipCells(cellStates, flipArray)
-    }, 50)
-  }
+      setGameState({ ...gameState, cellStates: cellStates });
+      flipCells(cellStates, flipArray);
+    }, 50);
+  };
 
   function resetGame() {
     setBoard({
@@ -168,7 +183,7 @@ export default function Board() {
   };
 
   return (
-    <div>
+    <>
       <ConfigToolbar
         easyButtonHandler={() => setGameConfig({ dimension: 9, numBombs: 10 })}
         mediumButtonHandler={() =>
@@ -192,41 +207,43 @@ export default function Board() {
           <Col style={{ float: "right" }}>
             <h3>
               <FontAwesomeIcon icon={faHourglass} />{" "}
-              
-                <Timer
-                  isActive={isActive}
-                  setIsActive={setIsActive}
-                  isPaused={isPaused}
-                  setIsPaused={setIsPaused}
-                  time={time}
-                  setTime={setTime}
-                />
+              <Timer
+                isActive={isActive}
+                setIsActive={setIsActive}
+                isPaused={isPaused}
+                setIsPaused={setIsPaused}
+                time={time}
+                setTime={setTime}
+              />
             </h3>
           </Col>
         </Row>
-        {board.setup.map((row, row_id) => {
-          return (
-            <div className="board-row" key={row_id}>
-              {row.map((cell, col_id) => {
-                return (
-                  <Square
-                    key={row_id + "-" + col_id}
-                    content={cell}
-                    flipped={gameState.cellStates[row_id][col_id]}
-                    flip={() => cellClickedHandler(row_id, col_id)}
-                    flag={() => cellFlaggedHandler(row_id, col_id)}
-                  />
-                );
-              })}
-            </div>
-          );
-        })}
+        <div className="board-container">
+          {board.setup.map((row, row_id) => {
+            return (
+              <div className="board-row" key={row_id}>
+                {row.map((cell, col_id) => {
+                  return (
+                    <Square
+                      key={row_id + "-" + col_id}
+                      content={cell}
+                      flipped={gameState.cellStates[row_id][col_id]}
+                      flip={() => cellClickedHandler(row_id, col_id)}
+                      flag={() => cellFlaggedHandler(row_id, col_id)}
+                      fontSize={fontSize}
+                    />
+                  );
+                })}
+              </div>
+            );
+          })}
+        </div>
       </div>
       <MessageModal
         show={showModal}
         onHide={() => setShowModal(false)}
         message={message}
       />
-    </div>
+    </>
   );
 }

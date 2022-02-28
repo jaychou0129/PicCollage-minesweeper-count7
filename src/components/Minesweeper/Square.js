@@ -10,8 +10,9 @@ export default function Square(props) {
         return '';
     }
   }
+
   return (
-    <button className={classList} onClick={props.flip} onContextMenu={(event) => {
+    <button className={classList} onClick={props.flip} style={{fontSize: props.fontSize}}  onContextMenu={(event) => {
       props.flag();
       event.preventDefault();
     }}>{ display() }
