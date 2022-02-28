@@ -1,7 +1,6 @@
 import {
   Button,
   ButtonGroup,
-  ButtonToolbar,
   InputGroup,
   Form,
   Stack,
@@ -43,19 +42,17 @@ export default function ConfigToolbar(props) {
         </Offcanvas.Header>
         <Offcanvas.Body>
           <Stack gap={3}>
-            <ButtonToolbar>
-              <ButtonGroup>
-                <Button variant="success" onClick={props.easyButtonHandler}>
-                  Easy
-                </Button>
-                <Button variant="success" onClick={props.mediumButtonHandler}>
-                  Medium
-                </Button>
-                <Button variant="success" onClick={props.hardButtonHandler}>
-                  Hard
-                </Button>
-              </ButtonGroup>
-            </ButtonToolbar>
+            <ButtonGroup>
+              <Button variant="success" onClick={props.easyButtonHandler}>
+                Easy
+              </Button>
+              <Button variant="success" onClick={props.mediumButtonHandler}>
+                Medium
+              </Button>
+              <Button variant="success" onClick={props.hardButtonHandler}>
+                Hard
+              </Button>
+            </ButtonGroup>
             <InputGroup className="me-auto">
               <InputGroup.Text>
                 <FontAwesomeIcon icon={faTableCells} />
@@ -64,7 +61,6 @@ export default function ConfigToolbar(props) {
                 placeholder="Board Size"
                 value={props.sizeValue}
                 readOnly
-                style={{ width: 80 }}
               />
             </InputGroup>
             <InputGroup>
@@ -75,7 +71,6 @@ export default function ConfigToolbar(props) {
                 placeholder="Number of bombs"
                 value={props.bombValue}
                 readOnly
-                style={{ width: 80 }}
               />
             </InputGroup>
           </Stack>

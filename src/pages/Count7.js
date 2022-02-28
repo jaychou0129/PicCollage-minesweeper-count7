@@ -1,6 +1,5 @@
 import { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
+import { Button, Container } from "react-bootstrap";
 import LinkButton from "../components/LinkButton";
 import SingleNumberInput from "../components/Count7/SingleNumberInput";
 import BatchTest from "../components/Count7/BatchTest";

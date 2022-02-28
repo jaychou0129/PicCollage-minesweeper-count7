@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { Button, Form, Row, Col } from "react-bootstrap";
 import MessageModal from "../MessageModal";
-import { inputValidator, countNumbersWith7 } from "../../scripts/Count7_scripts";
+import {
+  inputValidator,
+  countNumbersWith7,
+} from "../../scripts/Count7_scripts";
 
 export default function BatchTest() {
   const [batchInput, setBatchInput] = useState(
@@ -21,10 +24,7 @@ export default function BatchTest() {
     for (let i = 0; i < len; i++) {
       unitTestResults += unitTestProc(inputArr[i], outputArr[i], i + 1);
     }
-    if (unitTestResults === "") {
-      unitTestResults = "All tests passed!";
-    }
-    setMessage(unitTestResults);
+    setMessage(unitTestResults === "" ? "All tests passed!" : unitTestResults);
     setModalShow(true);
   };
 
@@ -73,7 +73,11 @@ export default function BatchTest() {
         Start Test
       </Button>
 
-      <MessageModal show={modalShow} onHide={() => setModalShow(false)} message={message} />
+      <MessageModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        message={message}
+      />
     </>
   );
 }

@@ -1,6 +1,11 @@
-import { calculateCount } from './helpers'
+import { calculateCount } from "./helpers";
 
-export const initializeBoard = (b, first_click_row, first_click_col, gameConfig) => {
+export const initializeBoard = (
+  b,
+  first_click_row,
+  first_click_col,
+  gameConfig
+) => {
   placeBombs(b, first_click_row, first_click_col, gameConfig);
   calculateNumbers(b, gameConfig);
 };
@@ -48,7 +53,15 @@ const calculateNumbers = (b, gameConfig) => {
   }
 };
 
-export const propagateOpening = (b, cellStates, start_x, start_y, gameConfig, gameState, setGameState) => {
+export const propagateOpening = (
+  b,
+  cellStates,
+  start_x,
+  start_y,
+  gameConfig,
+  gameState,
+  setGameState
+) => {
   // flip the starting cell
   cellStates[start_x][start_y] = 1;
   if (b[start_x][start_y] === "") {
@@ -70,7 +83,6 @@ export const propagateOpening = (b, cellStates, start_x, start_y, gameConfig, ga
 
 const propagateOpeningHelper = (b, flipSet, x, y, gameConfig) => {
   // skips if already in FLIPSET or out of bounds
-
   if (
     flipSet.has(`${x}-${y}`) ||
     x >= gameConfig.dimension ||

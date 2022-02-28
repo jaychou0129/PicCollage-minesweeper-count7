@@ -1,6 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import { Form } from "react-bootstrap";
-import { inputValidator, countNumbersWith7 } from "../../scripts/Count7_scripts";
+import {
+  inputValidator,
+  countNumbersWith7,
+} from "../../scripts/Count7_scripts";
 import MessageModal from "../MessageModal";
 
 export default function SingleNumberInput() {
@@ -44,7 +47,11 @@ export default function SingleNumberInput() {
       <p className="my-5" style={{ visibility: ans === -1 ? "hidden" : null }}>
         Answer: {ans}
       </p>
-      <MessageModal show={showModal} onHide={() => setShowModal(false)} message={message} />
+      <MessageModal
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        message={message}
+      />
     </>
   );
 }

@@ -9,12 +9,9 @@ import {
 } from "../../scripts/Minesweeper_scripts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHourglass } from "@fortawesome/free-solid-svg-icons";
-import {
-  Row,
-  Col
-} from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import Timer from "./Timer";
-import useWindowDimensions from "../useWindowDimensions";
+import useWindowDimensions from "../../scripts/useWindowDimensions";
 
 export default function Board() {
   const [gameOver, setGameOver] = useState(false);
@@ -45,7 +42,6 @@ export default function Board() {
 
   const [showModal, setShowModal] = useState(false);
   const [message, setMessage] = useState("");
-  const [fontSize, setFontSize] = useState("20px");
   const { height, width } = useWindowDimensions();
 
   useEffect(resetGame, [gameConfig]);
@@ -78,12 +74,6 @@ export default function Board() {
       handlePauseResume();
     }
   }, [gameOver]);
-
-  useEffect(() => {
-    setFontSize(
-      ((Math.min(width, height) * 0.85) / gameConfig.dimension) * 0.5 + "px"
-    );
-  }, [width, height, gameConfig.dimension]);
 
   const flipCells = (cellStates, flipArray) => {
     if (flipArray.length === 0) return;
@@ -209,9 +199,7 @@ export default function Board() {
               <FontAwesomeIcon icon={faHourglass} />{" "}
               <Timer
                 isActive={isActive}
-                setIsActive={setIsActive}
                 isPaused={isPaused}
-                setIsPaused={setIsPaused}
                 time={time}
                 setTime={setTime}
               />
@@ -230,7 +218,12 @@ export default function Board() {
                       flipped={gameState.cellStates[row_id][col_id]}
                       flip={() => cellClickedHandler(row_id, col_id)}
                       flag={() => cellFlaggedHandler(row_id, col_id)}
-                      fontSize={fontSize}
+                      fontSize={
+                        ((Math.min(width, height) * 0.85) /
+                          gameConfig.dimension) *
+                          0.5 +
+                        "px"
+                      }
                     />
                   );
                 })}
