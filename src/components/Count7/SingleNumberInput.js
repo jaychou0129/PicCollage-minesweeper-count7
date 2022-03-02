@@ -1,15 +1,18 @@
 import { useState, useRef, useEffect } from "react";
 import { Form } from "react-bootstrap";
+
+import MessageModal from "../MessageModal";
+
 import {
   inputValidator,
   countNumbersWith7,
 } from "../../scripts/Count7_scripts";
-import MessageModal from "../MessageModal";
 
 export default function SingleNumberInput() {
   const [ans, setAns] = useState(-1);
   const [n, setN] = useState("N");
   const inputRef = useRef(null);
+  
   const [showModal, setShowModal] = useState(false);
   const [message, setMessage] = useState("");
 

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Button, Form, Row, Col } from "react-bootstrap";
+
 import MessageModal from "../MessageModal";
+
 import {
   inputValidator,
   countNumbersWith7,
@@ -13,6 +15,7 @@ export default function BatchTest() {
   const [batchOutput, setBatchOutput] = useState(
     "0\n1\n2\n8\n13\n19\n134\n184\n271"
   );
+
   const [modalShow, setModalShow] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -37,10 +40,9 @@ export default function BatchTest() {
           n
         )}!\n`;
       }
-    } else {
+      return "";
+    } else
       return `Wrong input format for test ${lineNumber}: ${inputValidatorMessage}\n`;
-    }
-    return "";
   };
 
   return (

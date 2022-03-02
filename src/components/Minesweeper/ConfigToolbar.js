@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Button,
   ButtonGroup,
@@ -13,7 +14,6 @@ import {
   faGear,
   faArrowRotateBack,
 } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
 
 export default function ConfigToolbar(props) {
   const [showSettingPanel, setShowSettingPanel] = useState(false);

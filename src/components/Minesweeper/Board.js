@@ -1,17 +1,16 @@
-import Square from "./Square";
-import { useState, useEffect } from "react";
-import ConfigToolbar from "./ConfigToolbar";
-import MessageModal from "../MessageModal";
-import { deepCopy, calculateCount } from "../../scripts/helpers";
-import {
-  initializeBoard,
-  propagateOpening,
-} from "../../scripts/Minesweeper_scripts";
+import { useState, useEffect, useRef } from "react";
+import { Row, Col } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHourglass } from "@fortawesome/free-solid-svg-icons";
-import { Row, Col } from "react-bootstrap";
+
+import Square from "./Square";
+import ConfigToolbar from "./ConfigToolbar";
+import MessageModal from "../MessageModal";
 import Timer from "./Timer";
-import useWindowDimensions from "../../scripts/useWindowDimensions";
+
+import { deepCopy, calculateCount } from "../../scripts/helpers";
+import { initializeBoard, propagateOpening } from "../../scripts/Minesweeper_scripts";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 export default function Board() {
   const [gameOver, setGameOver] = useState(false);
@@ -36,13 +35,10 @@ export default function Board() {
     numFlags: 0,
   });
 
-  const [isActive, setIsActive] = useState(false);
-  const [isPaused, setIsPaused] = useState(true);
-  const [time, setTime] = useState(0);
-
   const [showModal, setShowModal] = useState(false);
   const [message, setMessage] = useState("");
   const { height, width } = useWindowDimensions();
+  const timerRef = useRef(null);
 
   useEffect(resetGame, [gameConfig]);
 
@@ -50,11 +46,7 @@ export default function Board() {
     if (gameState.numUnflipped === gameConfig.numBombs) {
       setGameOver(true);
 
-      const timeString =
-        ("0" + Math.floor(time / 60)).slice(-2) +
-        ":" +
-        ("0" + Math.floor(time % 60)).slice(-2);
-      setMessage("You Won!\nTime: " + timeString);
+      setMessage("You Won!\nTime: " + timerRef.current.time());
       setShowModal(true);
     }
   }, [gameState.numUnflipped]);
@@ -71,7 +63,7 @@ export default function Board() {
         }
       }
       flipCells(cellStates, flipArray);
-      handlePauseResume();
+      timerRef.current.stopTimer();
     }
   }, [gameOver]);
 
@@ -103,7 +95,7 @@ export default function Board() {
       numFlags: 0,
     });
     setGameOver(false);
-    handleReset();
+    timerRef.current.resetTimer();
   }
 
   const cellClickedHandler = (x, y) => {
@@ -126,7 +118,7 @@ export default function Board() {
         gameState,
         setGameState
       );
-      handleStart();
+      timerRef.current.startTimer();
     } else {
       if (board.setup[x][y] === "BOMB") {
         setGameOver(true);
@@ -158,20 +150,6 @@ export default function Board() {
     });
   };
 
-  const handleStart = () => {
-    setIsActive(true);
-    setIsPaused(false);
-  };
-
-  const handlePauseResume = () => {
-    setIsPaused(!isPaused);
-  };
-
-  const handleReset = () => {
-    setIsActive(false);
-    setTime(0);
-  };
-
   return (
     <>
       <ConfigToolbar
@@ -186,7 +164,7 @@ export default function Board() {
         bombValue={gameConfig.numBombs}
         restartHandler={() => {
           setGameConfig({ ...gameConfig });
-          handleReset();
+          timerRef.current.resetTimer();
         }}
       />
       <div>
@@ -197,12 +175,7 @@ export default function Board() {
           <Col style={{ float: "right" }}>
             <h3>
               <FontAwesomeIcon icon={faHourglass} />{" "}
-              <Timer
-                isActive={isActive}
-                isPaused={isPaused}
-                time={time}
-                setTime={setTime}
-              />
+              <Timer ref={timerRef} />
             </h3>
           </Col>
         </Row>

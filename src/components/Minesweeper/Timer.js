@@ -1,11 +1,39 @@
-import { useEffect } from "react";
+import { useEffect, useState, forwardRef, useImperativeHandle } from "react";
 
-export default function Timer({
-  isActive,
-  isPaused,
-  time,
-  setTime
-}) {
+const Time = forwardRef((_, ref) => {
+  const [isActive, setIsActive] = useState(false);
+  const [isPaused, setIsPaused] = useState(true);
+  const [time, setTime] = useState(0);
+
+  const handleStart = () => {
+    setIsActive(true);
+    setIsPaused(false);
+  };
+
+  const handleStop = () => {
+    setIsPaused(true);
+  };
+
+  const handleReset = () => {
+    setIsActive(false);
+    setTime(0);
+  };
+
+  const formattedTime = () => {
+    return (
+      ("0" + Math.floor(time / 60)).slice(-2) +
+      ":" +
+      ("0" + Math.floor(time % 60)).slice(-2)
+    );
+  };
+
+  useImperativeHandle(ref, () => ({
+    resetTimer: handleReset,
+    stopTimer: handleStop,
+    startTimer: handleStart,
+    time: formattedTime,
+  }));
+
   useEffect(() => {
     let interval = null;
 
@@ -21,10 +49,7 @@ export default function Timer({
     };
   }, [isActive, isPaused]);
 
-  return (
-    <>
-      <span className="digits">{("0" + Math.floor(time / 60)).slice(-2)}:</span>
-      <span className="digits">{("0" + Math.floor(time % 60)).slice(-2)}</span>
-    </>
-  );
-}
+  return <span>{formattedTime()}</span>;
+});
+
+export default Time;

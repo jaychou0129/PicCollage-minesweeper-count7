@@ -1,6 +1,5 @@
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import LinkButton from '../components/LinkButton';
+import { Row, Col } from "react-bootstrap";
+import LinkButton from "../components/LinkButton";
 
 export default function PageSelection() {
   return (
@@ -8,10 +7,10 @@ export default function PageSelection() {
       <p>Select one of the following to continue.</p>
       <Row>
         <Col>
-          <LinkButton to="/minesweeper" variant="main" size="xxl" text="Minesweeper"/>
+          <LinkButton to="/minesweeper" variant="main" size="xxl" text="Minesweeper" />
         </Col>
         <Col>
-          <LinkButton to="/count7" variant="main" size="xxl" text="Count 7's"/>
+          <LinkButton to="/count7" variant="main" size="xxl" text="Count 7's" />
         </Col>
       </Row>
     </header>
